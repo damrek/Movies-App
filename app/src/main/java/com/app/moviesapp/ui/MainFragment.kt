@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.moviesapp.R
 import com.app.moviesapp.data.DataSource
+import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.domain.RepoImpl
 import com.app.moviesapp.ui.viewmodel.MainViewModel
 import com.app.moviesapp.ui.viewmodel.VMFactory
+import com.app.moviesapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
 
     private val viewModel by viewModels<MainViewModel> { VMFactory(RepoImpl(DataSource())) }
 
@@ -26,15 +32,37 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        viewModel.fetchMoviesList.observe(viewLifecycleOwner, Observer { result ->
+            when(result){
+                is Resource.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    progressBar.visibility = View.GONE
+                    rv_movies.adapter = MainAdapter(requireContext(), result.data, this)
+                }
+                is Resource.Failure -> {
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Error getting data ${result.exception}",Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
 
-        btn_movie_detail.setOnClickListener {
-            findNavController().navigate(R.id.movieDetailFragment)
-        }
+    private fun setupRecyclerView(){
+        rv_movies.layoutManager = LinearLayoutManager(requireContext())
+        rv_movies.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
+    }
+
+    override fun onMovieCLick(movie: Movie) {
+        val bundle = Bundle()
+        bundle.putParcelable("movie", movie)
+        findNavController().navigate(R.id.movieDetailFragment, bundle)
     }
 }
