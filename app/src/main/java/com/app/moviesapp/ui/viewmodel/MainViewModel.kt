@@ -12,7 +12,7 @@ class MainViewModel(private val repo: Repo):ViewModel(){
     val fetchMoviesList = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
-            emit(repo.getMoviesList())
+            emit(repo.getMoviesList("popularity.desc"))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }

@@ -4,5 +4,5 @@ import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.vo.Resource
 
 interface Repo {
-    fun getMoviesList() : Resource<List<Movie>>
+    suspend fun getMoviesList(sortType:String, lang:String = "en") : Resource<List<Movie>>
 }

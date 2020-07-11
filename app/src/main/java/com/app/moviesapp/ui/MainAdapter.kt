@@ -38,7 +38,7 @@ class MainAdapter(
 
     inner class MainViewHolder(itemView: View) : BaseViewHolder<Movie>(itemView) {
         override fun bind(item: Movie, position: Int) {
-            Glide.with(context).load(item.image).into(itemView.movie_img)
+            Glide.with(context).load("https://image.tmdb.org/t/p/w500${item.image}").fitCenter().into(itemView.movie_img)
             itemView.movie_title.text = item.name
             itemView.movie_description.text = item.description
             itemView.setOnClickListener { itemClickListener.onMovieCLick(item)}

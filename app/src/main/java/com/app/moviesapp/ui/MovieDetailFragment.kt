@@ -1,6 +1,7 @@
 package com.app.moviesapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class MovieDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         requireArguments().let{
             movie = it.getParcelable("movie")!!
+            Log.d("MOVIE DETAIL", "${movie.toString()}")
         }
     }
 
