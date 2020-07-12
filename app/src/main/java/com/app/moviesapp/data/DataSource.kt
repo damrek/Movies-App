@@ -6,8 +6,12 @@ import com.app.moviesapp.vo.RetrofitClient
 
 class DataSource {
 
-    suspend fun getPopularMovies(sortType:String, lang:String):Resource<List<Movie>>{
-        return Resource.Success(RetrofitClient.webservice.getPopularMovies(sortType, lang).results)
+    suspend fun getPopularMovies(yearRelease:String, sortType:String, lang:String):Resource<List<Movie>>{
+        return Resource.Success(RetrofitClient.webservice.getPopularMovies(yearRelease, sortType, lang).results)
+    }
+
+    suspend fun getMoviesBySearch(query:String, lang:String):Resource<List<Movie>>{
+        return Resource.Success(RetrofitClient.webservice.getMoviesSearch(query, lang).results)
     }
 
 }

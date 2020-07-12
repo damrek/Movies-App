@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Movie(
     @Json(name="poster_path")
-    val image: String = "",
+    val image: String? = "",
     @Json(name="title")
     val name: String = "",
     @Json(name="overview")

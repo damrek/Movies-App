@@ -6,8 +6,11 @@ import com.app.moviesapp.vo.Resource
 
 class RepoImpl(private val dataSource: DataSource) : Repo {
 
-    override suspend fun getMoviesList(sortType:String, lang:String): Resource<List<Movie>> {
-        return dataSource.getPopularMovies(sortType, lang)
+    override suspend fun getMoviesList(yearRelease:String, sortType:String, lang:String): Resource<List<Movie>> {
+        return dataSource.getPopularMovies(yearRelease, sortType, lang)
     }
 
+    override suspend fun getMoviesListSearch(query:String, lang:String): Resource<List<Movie>> {
+        return dataSource.getMoviesBySearch(query, lang)
+    }
 }

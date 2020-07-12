@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,8 +39,13 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupSearchView()
+        setupObservers()
+    }
+
+    private fun setupObservers() {
         viewModel.fetchMoviesList.observe(viewLifecycleOwner, Observer { result ->
-            when(result){
+            when (result) {
                 is Resource.Loading -> {
                     progressBar.visibility = View.VISIBLE
                 }
@@ -49,15 +55,57 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Error getting data ${result.exception}",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error getting data ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+
+        viewModel.fetchMoviesFilterList.observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                }
+                is Resource.Success -> {
+                    progressBar.visibility = View.GONE
+                    rv_movies.adapter = MainAdapter(requireContext(), result.data, this)
+                }
+                is Resource.Failure -> {
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        "Error getting data ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
     }
 
-    private fun setupRecyclerView(){
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setMovie(query!!)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+    }
+
+    private fun setupRecyclerView() {
         rv_movies.layoutManager = LinearLayoutManager(requireContext())
-        rv_movies.addItemDecoration(DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL))
+        rv_movies.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
     override fun onMovieCLick(movie: Movie) {
