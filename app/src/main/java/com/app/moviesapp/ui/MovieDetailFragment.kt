@@ -38,6 +38,8 @@ class MovieDetailFragment : Fragment() {
             .fitCenter().placeholder(R.drawable.ic_baseline_broken_image_24).into(movie_img_detail)
         movie_title_detail.text = movie.name
         movie_desc_detail.text = movie.description
+        movie_votes_average_detail.text = movie.voteAverage.toString()
+        movie_release_year_detail.text = movie.releaseDate.split("-")[0]
     }
 
 }

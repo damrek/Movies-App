@@ -17,7 +17,7 @@ class MainAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnMovieClickListener {
-        fun onMovieCLick(movie:Movie)
+        fun onMovieCLick(movie: Movie)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -38,10 +38,14 @@ class MainAdapter(
 
     inner class MainViewHolder(itemView: View) : BaseViewHolder<Movie>(itemView) {
         override fun bind(item: Movie, position: Int) {
-            Glide.with(context).load("https://image.tmdb.org/t/p/w500${item.image}").placeholder(R.drawable.ic_baseline_broken_image_24).fitCenter().into(itemView.movie_img)
+            Glide.with(context).load("https://image.tmdb.org/t/p/w500${item.image}")
+                .placeholder(R.drawable.ic_baseline_broken_image_24).fitCenter()
+                .into(itemView.movie_img)
             itemView.movie_title.text = item.name
             itemView.movie_description.text = item.description
-            itemView.setOnClickListener { itemClickListener.onMovieCLick(item)}
+            itemView.setOnClickListener { itemClickListener.onMovieCLick(item) }
+            itemView.movie_votes_average.text = item.voteAverage.toString()
+            itemView.movie_release_year.text = item.releaseDate.split("-")[0]
         }
     }
 }
