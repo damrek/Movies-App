@@ -12,12 +12,18 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movies_row.view.*
 
 class MainAdapter(
-    private val context: Context, private val moviesList: List<Movie>,
+    private val context: Context, private val moviesList: MutableList<Movie>,
     private val itemClickListener: OnMovieClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnMovieClickListener {
-        fun onMovieCLick(movie: Movie)
+        fun onMovieCLick(movie: Movie, position: Int)
+    }
+
+    fun deleteMovie(position: Int){
+        moviesList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -43,7 +49,7 @@ class MainAdapter(
                 .into(itemView.movie_img)
             itemView.movie_title.text = item.name
             itemView.movie_description.text = item.description
-            itemView.setOnClickListener { itemClickListener.onMovieCLick(item) }
+            itemView.setOnClickListener { itemClickListener.onMovieCLick(item, position) }
             itemView.movie_votes_average.text = item.voteAverage.toString()
             itemView.movie_release_year.text = item.releaseDate.split("-")[0]
         }

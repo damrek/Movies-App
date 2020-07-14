@@ -23,4 +23,8 @@ class DataSource(private val appDatabase: AppDatabase) {
     suspend fun getMoviesFavorites(): Resource<List<MovieEntity>> {
         return Resource.Success(appDatabase.movieDao().getAllFavoriteMovies())
     }
+
+    suspend fun deleteMovieFromRoom(movie:MovieEntity){
+        appDatabase.movieDao().deleteMovie(movie)
+    }
 }

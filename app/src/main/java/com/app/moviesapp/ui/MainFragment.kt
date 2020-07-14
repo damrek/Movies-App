@@ -59,7 +59,7 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
                 }
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_movies.adapter = MainAdapter(requireContext(), result.data, this)
+                    rv_movies.adapter = MainAdapter(requireContext(), result.data.toMutableList(), this)
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
@@ -79,7 +79,7 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
                 }
                 is Resource.Success -> {
                     progressBar.visibility = View.GONE
-                    rv_movies.adapter = MainAdapter(requireContext(), result.data, this)
+                    rv_movies.adapter = MainAdapter(requireContext(), result.data.toMutableList(), this)
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
@@ -116,7 +116,7 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
         )
     }
 
-    override fun onMovieCLick(movie: Movie) {
+    override fun onMovieCLick(movie: Movie, position: Int) {
         val bundle = Bundle()
         bundle.putParcelable("movie", movie)
         findNavController().navigate(R.id.action_mainFragment_to_movieDetailFragment, bundle)

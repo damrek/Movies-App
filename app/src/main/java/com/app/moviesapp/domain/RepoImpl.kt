@@ -20,6 +20,10 @@ class RepoImpl(private val dataSource: DataSource) : Repo {
     }
 
     override suspend fun insertMovie(movie: MovieEntity) {
-        return dataSource.insertMovieIntoRoom(movie)
+        dataSource.insertMovieIntoRoom(movie)
+    }
+
+    override suspend fun deleteMovie(movie: MovieEntity) {
+        dataSource.deleteMovieFromRoom(movie)
     }
 }

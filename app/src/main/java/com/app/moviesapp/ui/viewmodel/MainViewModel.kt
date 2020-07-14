@@ -1,6 +1,7 @@
 package com.app.moviesapp.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.domain.Repo
 import com.app.moviesapp.vo.Resource
@@ -42,6 +43,12 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
     fun saveMovie(movie: MovieEntity) {
         viewModelScope.launch {
             repo.insertMovie(movie)
+        }
+    }
+
+    fun deleteMovie(movie: MovieEntity) {
+        viewModelScope.launch {
+            repo.deleteMovie(movie)
         }
     }
 
