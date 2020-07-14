@@ -2,6 +2,7 @@ package com.app.moviesapp.domain
 
 import com.app.moviesapp.data.DataSource
 import com.app.moviesapp.data.model.Movie
+import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.vo.Resource
 
 class RepoImpl(private val dataSource: DataSource) : Repo {
@@ -12,5 +13,13 @@ class RepoImpl(private val dataSource: DataSource) : Repo {
 
     override suspend fun getMoviesListSearch(query:String, lang:String): Resource<List<Movie>> {
         return dataSource.getMoviesBySearch(query, lang)
+    }
+
+    override suspend fun getFavoriteMovies(): Resource<List<MovieEntity>> {
+        return dataSource.getMoviesFavorites()
+    }
+
+    override suspend fun insertMovie(movie: MovieEntity) {
+        return dataSource.insertMovieIntoRoom(movie)
     }
 }

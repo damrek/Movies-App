@@ -1,9 +1,11 @@
 package com.app.moviesapp.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.domain.Repo
 import com.app.moviesapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainViewModel(private val repo: Repo) : ViewModel() {
 
@@ -24,7 +26,6 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }
-
     }
 
     val fetchMoviesFilterList = titleMovie.distinctUntilChanged().switchMap { queryMovie ->
@@ -35,6 +36,21 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }
+        }
+    }
+
+    fun saveMovie(movie: MovieEntity) {
+        viewModelScope.launch {
+            repo.insertMovie(movie)
+        }
+    }
+
+    fun getFavoriteMovies() = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            emit(repo.getFavoriteMovies())
+        } catch (e: Exception) {
+            emit(Resource.Failure(e))
         }
     }
 
