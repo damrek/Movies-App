@@ -44,20 +44,24 @@
             android:id="@+id/movie_votes_average_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_baseline_star_24"
             android:textAlignment="center"
             android:textSize="18sp"
             tools:text="4.2" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_save_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_favorite_24"
+            android:scaleType="fitXY"
+            app:fabSize="mini"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_baseline_favorite_24"
-        app:fabSize="mini" />
+
 
     <TextView
         android:id="@+id/movie_desc_detail"

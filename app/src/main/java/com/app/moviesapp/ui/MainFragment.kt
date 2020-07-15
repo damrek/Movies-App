@@ -124,13 +124,17 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.options_menu, menu)
+        inflater?.inflate(R.menu.settings_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_favorites ->
                 findNavController().navigate(R.id.action_mainFragment_to_favoritesFragment)
+            R.id.menu_settings ->
+            findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+            R.id.menu_about ->
+                findNavController().navigate(R.id.action_mainFragment_to_aboutFragment)
             else -> return true
         }
 

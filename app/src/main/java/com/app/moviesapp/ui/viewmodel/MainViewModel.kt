@@ -1,7 +1,6 @@
 package com.app.moviesapp.ui.viewmodel
 
 import androidx.lifecycle.*
-import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.domain.Repo
 import com.app.moviesapp.vo.Resource
@@ -23,7 +22,12 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
     val fetchMoviesList = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
-            emit(repo.getMoviesList("2020", "popularity.desc"))
+            emit(
+                repo.getMoviesList(
+                    "2020",
+                    "popularity.desc"
+                )
+            )
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }
@@ -33,7 +37,11 @@ class MainViewModel(private val repo: Repo) : ViewModel() {
         liveData(Dispatchers.IO) {
             emit(Resource.Loading())
             try {
-                emit(repo.getMoviesListSearch(queryMovie))
+                emit(
+                    repo.getMoviesListSearch(
+                        queryMovie
+                    )
+                )
             } catch (e: Exception) {
                 emit(Resource.Failure(e))
             }

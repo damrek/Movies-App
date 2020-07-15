@@ -1,5 +1,6 @@
 package com.app.moviesapp.data
 
+import com.app.App
 import com.app.moviesapp.AppDatabase
 import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
@@ -8,12 +9,12 @@ import com.app.moviesapp.vo.RetrofitClient
 
 class DataSource(private val appDatabase: AppDatabase) {
 
-    suspend fun getPopularMovies(yearRelease:String, sortType:String, lang:String):Resource<List<Movie>>{
-        return Resource.Success(RetrofitClient.webservice.getPopularMovies(yearRelease, sortType, lang).results)
+    suspend fun getPopularMovies(yearRelease:String, sortType:String):Resource<List<Movie>>{
+        return Resource.Success(RetrofitClient.webservice.getPopularMovies(yearRelease, sortType, App.getSharedPreferences().getString("language", "en")!!).results)
     }
 
-    suspend fun getMoviesBySearch(query:String, lang:String):Resource<List<Movie>>{
-        return Resource.Success(RetrofitClient.webservice.getMoviesSearch(query, lang).results)
+    suspend fun getMoviesBySearch(query:String):Resource<List<Movie>>{
+        return Resource.Success(RetrofitClient.webservice.getMoviesSearch(query, App.getSharedPreferences().getString("language", "en")!!).results)
     }
 
     suspend fun insertMovieIntoRoom(movie:MovieEntity){
@@ -27,4 +28,5 @@ class DataSource(private val appDatabase: AppDatabase) {
     suspend fun deleteMovieFromRoom(movie:MovieEntity){
         appDatabase.movieDao().deleteMovie(movie)
     }
+
 }

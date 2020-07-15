@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="language"
+        android:title="Language"
+        android:defaultValue="#00FFFF"
+        android:entries="@array/language_names_array"
+        android:entryValues="@array/language_names_values_array"
+        android:summary="Select a language from TMDb Api"
+        android:icon="@drawable/ic_baseline_language_24"
+        android:dialogIcon="@drawable/ic_baseline_language_24"
+        app:defaultValue="en"
+        />
+</PreferenceScreen>
