@@ -1,6 +1,5 @@
 package com.app.moviesapp.domain
 
-import com.app.moviesapp.data.DataSource
 import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.vo.Resource

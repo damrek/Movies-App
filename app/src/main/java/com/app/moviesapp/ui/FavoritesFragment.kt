@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.moviesapp.AppDatabase
 import com.app.moviesapp.R
-import com.app.moviesapp.data.DataSource
+import com.app.moviesapp.data.DataSourceImpl
 import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.domain.RepoImpl
@@ -29,7 +29,7 @@ class FavoritesFragment : Fragment(), MainAdapter.OnMovieClickListener {
     private val viewModel by activityViewModels<MainViewModel> {
         VMFactory(
             RepoImpl(
-                DataSource(
+                DataSourceImpl(
                     AppDatabase.getDatabase(requireActivity().applicationContext)
                 )
             )

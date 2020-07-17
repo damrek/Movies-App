@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.app.moviesapp.AppDatabase
 import com.app.moviesapp.R
-import com.app.moviesapp.data.DataSource
+import com.app.moviesapp.data.DataSourceImpl
 import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.domain.RepoImpl
@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
 class MovieDetailFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSource(
+    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSourceImpl(
         AppDatabase.getDatabase(requireActivity().applicationContext)))) }
 
     private lateinit var movie: Movie
