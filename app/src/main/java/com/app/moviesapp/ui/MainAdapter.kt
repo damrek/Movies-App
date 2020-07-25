@@ -47,6 +47,9 @@ class MainAdapter(
             Glide.with(context).load("https://image.tmdb.org/t/p/w500${item.image}")
                 .placeholder(R.drawable.ic_baseline_broken_image_24).fitCenter()
                 .into(itemView.movie_img)
+            if(item.isAdult){
+                itemView.movie_adult_img.visibility =  View.VISIBLE
+            }
             itemView.movie_title.text = item.name
             itemView.movie_description.text = item.description
             itemView.setOnClickListener { itemClickListener.onMovieCLick(item, position) }

@@ -10,6 +10,6 @@ interface WebService {
     suspend fun getPopularMovies(@Query("primary_release_year") yearRelease: String, @Query("sort_by") sortType: String, @Query("language") lang: String): MovieResponse
 
     @GET("search/movie")
-    suspend fun getMoviesSearch(@Query("query") query: String, @Query("language") lang: String): MovieResponse
+    suspend fun getMoviesSearch(@Query("query") query: String, @Query("language") lang: String, @Query("include_adult") adult: Boolean): MovieResponse
 
 }

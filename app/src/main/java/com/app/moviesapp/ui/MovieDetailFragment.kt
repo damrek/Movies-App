@@ -22,8 +22,15 @@ import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
 class MovieDetailFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> { VMFactory(RepoImpl(DataSourceImpl(
-        AppDatabase.getDatabase(requireActivity().applicationContext)))) }
+    private val viewModel by activityViewModels<MainViewModel> {
+        VMFactory(
+            RepoImpl(
+                DataSourceImpl(
+                    AppDatabase.getDatabase(requireActivity().applicationContext)
+                )
+            )
+        )
+    }
 
     private lateinit var movie: Movie
 
@@ -47,12 +54,25 @@ class MovieDetailFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = movie.name
         Glide.with(requireContext()).load("https://image.tmdb.org/t/p/w500${movie.image}")
             .fitCenter().placeholder(R.drawable.ic_baseline_broken_image_24).into(movie_img_detail)
+        if (movie.isAdult) {
+            movie_adult_detail_img.visibility = View.VISIBLE
+        }
         movie_title_detail.text = movie.name
         movie_desc_detail.text = movie.description
         movie_votes_average_detail.text = movie.voteAverage.toString()
         movie_release_year_detail.text = movie.releaseDate.split("-")[0]
         btn_save_movie.setOnClickListener {
-            viewModel.saveMovie(MovieEntity(movie.movieId, movie.releaseDate,movie.image,movie.name,movie.description,movie.voteAverage,movie.adult))
+            viewModel.saveMovie(
+                MovieEntity(
+                    movie.movieId,
+                    movie.releaseDate,
+                    movie.image,
+                    movie.name,
+                    movie.description,
+                    movie.voteAverage,
+                    movie.adult
+                )
+            )
             Toast.makeText(requireContext(), "Movie saved on favorites!", Toast.LENGTH_SHORT).show()
         }
     }

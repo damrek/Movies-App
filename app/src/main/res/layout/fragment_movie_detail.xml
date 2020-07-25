@@ -40,6 +40,16 @@
             android:textSize="18sp"
             tools:text="2014" />
 
+        <ImageView
+            android:id="@+id/movie_adult_detail_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_movieadult"
+            android:tint="#FF00"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/movie_votes_average_detail"
             android:layout_width="wrap_content"
@@ -54,20 +64,30 @@
             android:id="@+id/btn_save_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_favorite_24"
-            android:scaleType="fitXY"
-            app:fabSize="mini"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"/>
+            android:layout_marginBottom="2dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_favorite_24"
+            app:fabSize="mini" />
     </LinearLayout>
 
-
-
-    <TextView
-        android:id="@+id/movie_desc_detail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Movie description" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movie_desc_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="4sp"
+                tools:text="Movie description" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 

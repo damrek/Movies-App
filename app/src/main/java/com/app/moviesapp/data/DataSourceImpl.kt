@@ -15,7 +15,7 @@ class DataSourceImpl(private val appDatabase: AppDatabase) : DataSource {
     }
 
     override suspend fun getMoviesBySearch(query:String):Resource<List<Movie>>{
-        return Resource.Success(RetrofitClient.webservice.getMoviesSearch(query, App.getSharedPreferences().getString("language", "en")!!).results)
+        return Resource.Success(RetrofitClient.webservice.getMoviesSearch(query, App.getSharedPreferences().getString("language", "en")!!,true).results)
     }
 
     override suspend fun insertMovieIntoRoom(movie:MovieEntity){
