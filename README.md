@@ -15,21 +15,25 @@ Clone this repository and import into Android Studio
 File _local.properties_ must include variable with your own TMDb Developer Api Key
 
 ```
-tmdb_api_key = "xxxxxxxxxxxxxxxxxxxxxx"
+    tmdb_api_key = "xxxxxxxxxxxxxxxxxxxxxx"
 ```
 
 ## Demo
 
-<h3 align="center"> Home Screen and Movie Search </h3>
+<h3 align="center"> Home Screen | Sort Filters **NEW | Movie Search </h3>
 <p align="center">
     <img src="assets/screen_home.png"
         alt="Movies List"    
         style="margin-right: 10px;"    
-        width="200" />
+        width="175" />
+    <img src="assets/screen_sortfilters.gif?raw=true"
+        alt="Search Movie Screen Action GIF"    
+        style="margin-right: 10px;"    
+        width="170" />
     <img src="assets/screen_search.gif?raw=true"
         alt="Search Movie Screen Action GIF"    
         style="margin-right: 10px;"    
-        width="200" />
+        width="175" />
 </p>
 
 <h3 align="center">Movie details and Add to Favorites </h3>
@@ -37,11 +41,11 @@ tmdb_api_key = "xxxxxxxxxxxxxxxxxxxxxx"
             <img src="assets/screen_movie_detail.png"
         alt="Movie Detail Screen"    
         style="margin-right: 10px;"    
-        width="200" />
+        width="175" />
             <img src="assets/screen_addtofavorites.gif?raw=true"
         alt="Add movie to favorites list Action GIF"    
         style="margin-right: 10px;"    
-        width="200" />
+        width="175" />
 </p>
  
   
@@ -50,11 +54,11 @@ tmdb_api_key = "xxxxxxxxxxxxxxxxxxxxxx"
     <img src="assets/screen_preference_settings.png"
         alt="Preference Settings Screen"    
         style="margin-right: 10px;"    
-        width="200" />
+        width="175" />
     <img src="assets/screen_about.png"
         alt="About App Screen"    
         style="margin-right: 10px;"    
-        width="200" />
+        width="175" />
 </p>
 
 
