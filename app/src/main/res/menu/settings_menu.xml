@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-    android:id="@+id/menu_favorites"
-    android:icon="@drawable/ic_baseline_favorite_24"
-    android:title="Favorites"
-    app:showAsAction="ifRoom" />
+        android:id="@+id/menu_sort"
+        android:icon="@drawable/ic_baseline_sort_24"
+        android:title="Sort"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_favorites"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="Favorites"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_settings"
-        app:showAsAction="never"
-        android:title="Settings"/>
+        android:title="Settings"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_about"

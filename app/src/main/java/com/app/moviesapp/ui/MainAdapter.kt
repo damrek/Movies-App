@@ -10,6 +10,7 @@ import com.app.moviesapp.base.BaseViewHolder
 import com.app.moviesapp.data.model.Movie
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movies_row.view.*
+import java.util.*
 
 class MainAdapter(
     private val context: Context, private val moviesList: MutableList<Movie>,
@@ -24,6 +25,14 @@ class MainAdapter(
         moviesList.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, itemCount)
+    }
+
+    fun sortMovies(type:String){
+        when(type){
+            "Alphabetically" ->  moviesList.sortBy { it -> it.name  }
+            "Votes average" ->  moviesList.sortBy { it -> it.voteAverage  }
+        }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
