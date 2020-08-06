@@ -2,7 +2,7 @@
 
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
 
-App made in Kotlin with educational purposes uses [TMDb Developers Api](https://developers.themoviedb.org/3/) in order to get information about movies. Implements MVVM (Model View ViewModel) architecture using the components Navigation, ViewModel, LiveData, Coroutines, Room etc.
+App made in Kotlin with educational purposes uses [TMDb Developers Api](https://developers.themoviedb.org/3/) in order to get information about movies. Implements MVVM (Model View ViewModel) architecture using the components Navigation, ViewModel, LiveData, Coroutines, Room, Hilt etc.
 
 ## Installation
 
@@ -66,6 +66,7 @@ File _local.properties_ must include variable with your own TMDb Developer Api K
 
 - Using MVVM (Model-View-ViewModel) Architecture
 - Using Room Persistence for local database (favorite movies list)
+- Using HILT for Dependency Injection (VM, WebService and Preferences)
 - Using Retrofit to request api network
 - Using Moshi to parse JSON into objects
 - Using Glide for loading image from url
@@ -77,6 +78,7 @@ File _local.properties_ must include variable with your own TMDb Developer Api K
 - [Retrofit 2](https://square.github.io/retrofit/)
 - [Moshi](https://github.com/square/moshi)
 - [Glide](https://github.com/bumptech/glide)
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-jetpack)
 - [AndroidX](https://mvnrepository.com/artifact/androidx)
 
 ## Support me
