@@ -30,7 +30,7 @@ class MainAdapter(
     fun sortMovies(type:String){
         when(type){
             "Alphabetically" ->  moviesList.sortBy { it -> it.name  }
-            "Votes average" ->  moviesList.sortBy { it -> it.voteAverage  }
+            "Votes average" ->  moviesList.sortByDescending { it -> it.voteAverage  }
         }
         notifyDataSetChanged()
     }

@@ -1,5 +1,6 @@
 package com.app.moviesapp.ui.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.domain.Repo
@@ -7,8 +8,9 @@ import com.app.moviesapp.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class MainViewModel(private val repo: Repo) : ViewModel() {
+class MainViewModel @ViewModelInject constructor(private val repo: Repo) : ViewModel() {
 
     private val titleMovie = MutableLiveData<String>()
 

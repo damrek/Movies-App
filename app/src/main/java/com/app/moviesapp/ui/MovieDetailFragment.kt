@@ -9,28 +9,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.app.moviesapp.AppDatabase
 import com.app.moviesapp.R
-import com.app.moviesapp.data.DataSourceImpl
 import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
-import com.app.moviesapp.domain.RepoImpl
 import com.app.moviesapp.ui.viewmodel.MainViewModel
-import com.app.moviesapp.ui.viewmodel.VMFactory
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
+@AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
-    private val viewModel by activityViewModels<MainViewModel> {
-        VMFactory(
-            RepoImpl(
-                DataSourceImpl(
-                    AppDatabase.getDatabase(requireActivity().applicationContext)
-                )
-            )
-        )
-    }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     private lateinit var movie: Movie
 

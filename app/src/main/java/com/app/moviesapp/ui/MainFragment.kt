@@ -12,29 +12,19 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.moviesapp.AppDatabase
 import com.app.moviesapp.R
-import com.app.moviesapp.data.DataSourceImpl
 import com.app.moviesapp.data.model.Movie
-import com.app.moviesapp.domain.RepoImpl
 import com.app.moviesapp.ui.viewmodel.MainViewModel
-import com.app.moviesapp.ui.viewmodel.VMFactory
 import com.app.moviesapp.vo.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
+@AndroidEntryPoint
 class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
 
     private lateinit var adapter: MainAdapter
 
-    private val viewModel by activityViewModels<MainViewModel> {
-        VMFactory(
-            RepoImpl(
-                DataSourceImpl(
-                    AppDatabase.getDatabase(requireActivity().applicationContext)
-                )
-            )
-        )
-    }
+    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,6 +150,7 @@ class MainFragment : Fragment(), MainAdapter.OnMovieClickListener {
         builder.setTitle(resources.getString(R.string.shortdialog_title))
             .setSingleChoiceItems(listItems, -1, listener)
             .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                if(adapter.itemCount>0)
                 adapter.sortMovies(mResult)
             })
             .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->

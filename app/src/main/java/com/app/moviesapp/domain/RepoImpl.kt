@@ -3,8 +3,9 @@ package com.app.moviesapp.domain
 import com.app.moviesapp.data.model.Movie
 import com.app.moviesapp.data.model.MovieEntity
 import com.app.moviesapp.vo.Resource
+import javax.inject.Inject
 
-class RepoImpl(private val dataSource: DataSource) : Repo {
+class RepoImpl @Inject constructor(private val dataSource: DataSource) : Repo {
 
     override suspend fun getMoviesList(yearRelease:String, sortType:String): Resource<List<Movie>> {
         return dataSource.getPopularMovies(yearRelease, sortType)
